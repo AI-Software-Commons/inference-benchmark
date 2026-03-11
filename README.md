@@ -1,3 +1,7 @@
+> [!NOTE]
+> This repository is no longer under active development. For inference benchmarking, use https://github.com/kubernetes-sigs/inference-perf instead.
+> 
+
 # Inference Benchmark
 
 A model server agnostic inference benchmarking tool that can be used to
