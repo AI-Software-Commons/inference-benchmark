@@ -15,7 +15,9 @@ RUN wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfilter
 
 COPY benchmark_serving.py benchmark_serving.py
 COPY latency_throughput_curve.sh latency_throughput_curve.sh
-COPY datasets/*.json /workspace/
+
+# Custom datasets are not in this repository. Generate them with
+# datasets/import_dataset.py, then mount or copy the JSON into /workspace.
 
 RUN chmod +x latency_throughput_curve.sh
 RUN chmod +x benchmark_serving.py
