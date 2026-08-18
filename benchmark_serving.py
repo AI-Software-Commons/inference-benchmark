@@ -873,6 +873,7 @@ async def print_and_save_result(args: argparse.Namespace, benchmark_duration_sec
     ])),
     **ttft_stats,
     **itls_stats,
+    **tpot_stats,
     # NOTE: The latency below includes requests awaiting time on server side.
     # It's not comparable with the model inference latency for batch size 1.
     **(get_stats_for_set("latency_ms", "milliseconds/request (includes waiting time on server)" ,[latency for _, _, latency in request_latencies])),
