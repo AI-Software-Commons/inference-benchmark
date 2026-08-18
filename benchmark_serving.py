@@ -27,7 +27,7 @@ import json
 import random
 import requests
 import time
-from typing import AsyncGenerator, List, Optional, Tuple, Dict
+from typing import AsyncGenerator, List, Tuple, Dict
 from prometheus_client import start_http_server, Histogram, Gauge, Counter
 import logging
 
