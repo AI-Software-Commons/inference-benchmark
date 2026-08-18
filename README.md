@@ -1,12 +1,41 @@
-> [!NOTE]
-> This repository is no longer under active development. For inference benchmarking, use https://github.com/kubernetes-sigs/inference-perf instead.
-> 
+## Archive Status
+
+This repository is maintained by AI Software Commons.
+
+Original project:
+https://github.com/AI-Hypercomputer/inference-benchmark
+
+Upstream status: Archived
+Fork status: MAINTAINED FORK
+
+This repository is not affiliated with or endorsed by Google or AI-Hypercomputer.
+
+> [!IMPORTANT]
+> **For new benchmarking work, use https://github.com/kubernetes-sigs/inference-perf.**
+> It is the actively developed successor and the upstream project points to it.
+>
+> This fork exists for one reason: to keep the original harness installable and
+> runnable, so benchmark numbers produced with it stay reproducible. Scope is
+> limited to dependency health, packaging, and correctness fixes. No new features.
+
+---
 
 # Inference Benchmark
 
 A model server agnostic inference benchmarking tool that can be used to
 benchmark LLMs running on different infrastructure like GPUs and TPUs. It can also
 be run on a GKE cluster as a container.
+
+## Changes in this fork
+
+- Fixed: TPOT statistics were printed but never written to the saved JSON results.
+- Fixed: `docker build` failed because `COPY datasets/*.json` matched no files.
+- `requirements.txt` now lists only what `benchmark_serving.py` imports. It no
+  longer installs `torch`, `xformers`, `ray`, `fastapi`, or `uvicorn`. This is a
+  benchmark client, not a model server.
+- Development tools moved to `requirements-dev.txt`.
+- Docker base image moved from Python 3.9 (end of life) to Python 3.11.
+- Added CI and regression tests.
 
 ## Run the benchmark
 
