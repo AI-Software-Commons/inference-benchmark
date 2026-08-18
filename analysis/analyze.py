@@ -114,8 +114,10 @@ def parse_and_plot(folder_path, instance_price_per_hour=None):
                         print(f"  - Note: 'avg_normalized_time_per_output_token_ms' not found in {filename}.")
                 else:
                     missing_core = []
-                    if throughput is None: missing_core.append("'throughput'")
-                    if request_rate is None: missing_core.append("'request_rate'")
+                    if throughput is None:
+                        missing_core.append("'throughput'")
+                    if request_rate is None:
+                        missing_core.append("'request_rate'")
                     print(f"Warning: Missing core metric(s) ({', '.join(missing_core)}) in {filename}. Skipping this file for plots.")
 
             except (json.JSONDecodeError, FileNotFoundError) as e:

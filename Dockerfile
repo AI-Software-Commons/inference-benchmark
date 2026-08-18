@@ -1,4 +1,4 @@
-FROM python:3.9.20-slim-bookworm as dev
+FROM python:3.11-slim-bookworm AS dev
 
 RUN apt-get update -y \
     && apt-get install -y python3-pip git vim curl wget
@@ -15,7 +15,9 @@ RUN wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfilter
 
 COPY benchmark_serving.py benchmark_serving.py
 COPY latency_throughput_curve.sh latency_throughput_curve.sh
-COPY datasets/*.json /workspace/
+
+# Custom datasets are not in this repository. Generate them with
+# datasets/import_dataset.py, then mount or copy the JSON into /workspace.
 
 RUN chmod +x latency_throughput_curve.sh
 RUN chmod +x benchmark_serving.py

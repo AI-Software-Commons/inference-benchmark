@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      # Fails if requirements.txt is missing a package that the script imports.
+      - name: Import check
+        run: python benchmark_serving.py --help
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Test
+        run: pytest -q
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Builds the dependency layers only. The full image downloads the
+      # ShareGPT dataset, which is too large for every CI run.
+      - name: Build dependency layers
+        run: |
+          sed '/^RUN wget /,$d' Dockerfile > Dockerfile.ci
+          docker build -f Dockerfile.ci -t inference-benchmark:ci .

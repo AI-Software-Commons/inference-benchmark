@@ -1,39 +1,21 @@
-# formatting
-yapf==0.32.0
-toml==0.10.2
-ruff==0.1.5
+# Runtime dependencies for benchmark_serving.py.
+# This tool is an HTTP client. It does not run a model, so it does not need
+# torch, xformers, ray, or a server framework.
+# Dev tools are in requirements-dev.txt.
+# The dataset tool has its own file: datasets/requirements.txt.
+# The analysis tool needs only matplotlib: see analysis/README.md.
 
-# type checking
-mypy==0.991
-types-PyYAML
-types-requests
-types-setuptools
-
-# testing
-pytest
-pytest-forked
-pytest-asyncio
-httpx
-einops # required for MPT
-openai
-requests
-
-# run
-ninja  # For faster builds.
-psutil
-ray >= 2.9
-sentencepiece  # Required for LLaMA tokenizer.
-numpy < 2.0
-torch
-transformers >= 4.42.0 # Required for Qwen2
-xformers
-fastapi
-uvicorn[standard]
-pydantic >= 2.0  # Required for OpenAI server.
-aioprometheus[starlette]
-pynvml == 11.5.0
-accelerate
 aiohttp
+numpy
+requests
+transformers >= 4.42.0  # Required for Qwen2. Used for AutoTokenizer only.
+
+# Metrics export
+prometheus_client >= 0.21.0
+
+# Google Cloud output upload and auth
 google-auth
 google-cloud-storage >= 2.18.2
-prometheus_client >= 0.21.0
+protobuf
+
+# Add sentencepiece if your model uses a slow SentencePiece tokenizer.

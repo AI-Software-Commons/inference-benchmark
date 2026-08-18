@@ -1,0 +1,14 @@
+# Development dependencies. Not needed to run the benchmark.
+-r requirements.txt
+
+# formatting and linting
+ruff==0.1.5
+
+# type checking
+mypy==0.991
+types-requests
+types-setuptools
+
+# testing
+pytest
+pytest-asyncio

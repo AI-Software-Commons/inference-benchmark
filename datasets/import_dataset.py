@@ -6,7 +6,6 @@ from transformers import AutoTokenizer
 import pandas as pd
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-import os
 import subprocess
 import csv
 
@@ -72,7 +71,7 @@ def calculate_token_stats(dataset, filename, tokenizer_name, max_samples=None, i
     output_token_counts = []
     prompts = []
     responses = []
-    results, histogram_data, js = None, None, None
+    results, histogram_data = None, None
     
     # Process each example
     for example in tqdm(dataset, desc="sampling examples", unit="example"):
